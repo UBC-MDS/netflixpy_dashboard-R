@@ -6,7 +6,7 @@ To address this issue, we built a data visualization dashboard that allows our t
 
 
 ## Usage
-The link to the app is [here](https://dsci-532-netflixpy.herokuapp.com/)
+The link to the app is <not read yet>
 
 Usage examples:
 - Select genre categories from the side bar to filter the plots by genres.
@@ -32,13 +32,13 @@ This app contains a landing page that shows the distribution (bar, line or densi
 4. Taiwo Owoseni
 
 Feedback and suggestions are always welcome! Please read [the contributing
-guidelines](https://github.com/UBC-MDS/netflixpy_dashboard/blob/main/CONTRIBUTING.md)
+guidelines](https://github.com/UBC-MDS/netflixpy_dashboard-R/blob/main/CONTRIBUTING.md)
 to get started.
 
 ## Installation
 If you would like to help contribute to the app, you can set up the system as follows:
 1. Download the necessary packages listed in `requirements.txt` using `pip` or `conda`
-2. Clone this repo using `https://github.com/UBC-MDS/netflixpy_dashboard.git`
+2. Clone this repo using `https://github.com/UBC-MDS/netflixpy_dashboard-R.git`
 
 To run the app locally:
 1. Navigate to the root of this repo
