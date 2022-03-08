@@ -21,7 +21,7 @@ This app contains a landing page that shows the distribution (bar, line or densi
 ## Dashboard Sketch
 
 
-![Gif](docs/netflixpy gif.gif)
+![Gif](docs/netflixpy_gif.gif)
 
 
 ## Contributions
