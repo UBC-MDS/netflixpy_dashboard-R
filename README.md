@@ -10,13 +10,20 @@ The link to the app is [here](https://netflixpy-dashboard-r.herokuapp.com/)
 
 Usage examples:
 - Select genre categories from the side bar to filter the plots by genres.
+- Select rating categories from the side bar to filter the plots by rating.
 - Use the slider on the top of the page to view movie and TV show data throughout the years.
 - Click on the Movie or TV shows tabs to view plots on movie durations.
 
 
 ## Description
-This app contains a landing page that shows the distribution (bar, line or density chart) of the release year, country, director and duration for a movie or TV show.  This app also contains a plot for the number of movies or TV shows over the release year, as well as plots for the number of movies or TV shows for different countries or directors.  Other plots included in this app are plots for the counts of movies or TV shows versus their duration (separate plots for movies and TV shows, where movie duration will be a continuous scale while TV show duration will be a discrete scale).  Users can filter the plots by selecting a date range and selecting to include movies, TV shows, or both by clicking the radial button.  Users also have the option to select multiple countries or directors from dropdown menus for comparison between the number of movies for different countries or directors.  Additionally, by dragging a range of years in the release year plot, users can further filter the country, director, and duration plots to a smaller subset of data reflecting the selected range of years. 
+This app contains a landing page that shows the distribution (bar, box and map plot) of the release year, country, director and duration for a movie or TV show.  It contains a plot for the number of movies or TV shows over the release year, as well as plots for the number of movies or TV shows for different countries or directors. Other plots included in this app are plots for the counts of movies or TV shows versus their duration (separate plots for movies and TV shows, where movie duration will be a continuous scale represented in minutes in the x-axis while TV show duration will be a discrete scale represent in seasons on the x-axis).  
 
+Users can filter the plots by selecting a genre categories and/or rating categories. Additionally, by dragging a range of years in the year slidebar, users can further filter the country, director, and duration, word cloud plots to a smaller subset of data reflecting the selected range of years. 
+
+## Dashboard Sketch
+
+
+![dashboard gif](docs/R_netflix_gif.gif)
 
 ## Contributions
 
@@ -26,13 +33,13 @@ This app contains a landing page that shows the distribution (bar, line or densi
 4. Taiwo Owoseni
 
 Feedback and suggestions are always welcome! Please read [the contributing
-guidelines](https://github.com/UBC-MDS/netflixpy_dashboard-R/blob/main/CONTRIBUTING.md)
+guidelines](https://github.com/UBC-MDS/netflixpy_dashboard_R/blob/main/CONTRIBUTING.md)
 to get started.
 
 ## Installation
 If you would like to help contribute to the app, you can set up the system as follows:
 1. Download the necessary packages listed in `init.R`
-2. Clone this repo using `https://github.com/UBC-MDS/netflixpy_dashboard.git`
+2. Clone this repo using `https://github.com/UBC-MDS/netflix_dashboard_R.git`
 
 ### To run the app locally:
 1. Navigate to the root of this repo
@@ -46,13 +53,13 @@ R src/app.R
 ## Support
 
 If you run into troubles, please [check the issue
-list](https://github.com/UBC-MDS/netflixpy_dashboard-R/issues) to see
+list](https://github.com/UBC-MDS/netflixpy_dashboard_R/issues) to see
 if your problem has already been reported or to open new issues.
 
 ## Code of conduct
 
 In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Detailed descriptions
-of these points can be found in [`CONDUCT.md`](https://github.com/UBC-MDS/netflixpy_dashboard-R/blob/main/CONDUCT.md).
+of these points can be found in [`CONDUCT.md`](https://github.com/UBC-MDS/netflixpy_dashboard_R/blob/main/CONDUCT.md).
 
 ## License
 The Netflix Dashboard was created by Anahita Einolghozati, Joyce Wang, Rohit Rawat, and Taiwo Owoseni. It is licensed under the terms of the MIT license.
