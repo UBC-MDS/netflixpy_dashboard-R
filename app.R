@@ -7,11 +7,13 @@ app <- Dash$new(external_stylesheets = dbcThemes$DARKLY)
 app$title("Netflix Dashboard")
 
 df <- read_csv("data/processed/processed.csv")
-genres_df <- read_csv("data/processed/df.csv")
+world_map <- read.csv("data/processed/world_map_data.csv") %>% select(country, country_code, lat, lon) %>% distinct()
+country_codes <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/2014_world_gdp_with_codes.csv")
+
 selected_genres <- as.list(unique(df$genres))
 selected_ratings <- as.list(df %>%
   filter(rating %in% c("PG-13", "TV-MA", "PG", "TV-14", "TV-PG", "TV-Y", "TV-Y7", "R", "TV-G", "G", "NC-17", "NR", "UR", "TV-Y7-FV")) %>%
-    pull(rating) %>% unique())
+  pull(rating) %>% unique())
 
 transparent <- "#00000000" # for transparent backgrounds
 color1 <- "#9E0600" # red
@@ -26,22 +28,24 @@ options_style <- list(
   "textAlign" = "center", "border_radius" = border_radius,
   "margin-top" = "15px"
 )
-chart_style <- list("background"= color1, "color"= title_color, 
-                   'textAlign'= 'center', 'border-radius'= border_radius)
+chart_style <- list(
+  "background" = color1, "color" = title_color,
+  "textAlign" = "center", "border-radius" = border_radius
+)
 
 
 app$layout(
   dbcContainer(list(
     dbcRow(
       htmlDiv(
-        htmlH1("Netflix Explorer", style=list("font-weight"= "bold", "fontSize"=70)
-               )
+        htmlH1("Netflix Explorer", style = list("font-weight" = "bold", "fontSize" = 70))
       )
     ),
     dbcRow(list(
       dbcCol(list(
         htmlP("Select Year",
-              style = options_style),
+          style = options_style
+        ),
         dccSlider(
           id = "year_slider",
           min = 1942,
@@ -53,45 +57,51 @@ app$layout(
             "2021" = "2021"
           ),
           dots = TRUE,
-          tooltip = list("placement"= "bottom", "always_visible"= FALSE)
+          tooltip = list("placement" = "bottom", "always_visible" = FALSE)
         ),
         htmlP("Select Genres",
-              style = options_style),
+          style = options_style
+        ),
         dccDropdown(
           id = "genre_list",
           options = selected_genres,
           value = list("International", "Dramas", "Thrillers", "Comedies"),
           multi = T,
-          style = list("background-color"= transparent, "border"= "0", "color"= "black")
+          style = list("background-color" = transparent, "border" = "0", "color" = "black")
         ),
         htmlP("Select Ratings",
-              style = options_style),
+          style = options_style
+        ),
         dccDropdown(
           id = "rating_list",
           options = selected_ratings,
-          value = list('PG-13','TV-MA','PG','TV-14','TV-PG','TV-Y','R','TV-G','G','NC-17','NR'),
+          value = list("PG-13", "TV-MA", "PG", "TV-14", "TV-PG", "TV-Y", "R", "TV-G", "G", "NC-17", "NR"),
           multi = T,
-          style = list("background-color"= transparent, "border"= "0", "color"= "black")
+          style = list("background-color" = transparent, "border" = "0", "color" = "black")
         )
-        
-      ), md = 4, style = list("border" =  paste(border_width,"solid", color2), "border-radius" = border_radius,
-                              "width" = '17%')),
+      ), md = 4, style = list(
+        "border" = paste(border_width, "solid", color2), "border-radius" = border_radius,
+        "width" = "17%"
+      )),
       dbcCol(list(
         dbcRow(list(
           htmlH3("Movies and TV shows produced worldwide",
-                 style=chart_style),
+            style = chart_style
+          ),
           dccGraph(id = "world_map")
-        ), style = list("border" = paste(border_width,"solid", color2), "width" = "100%", "border-radius" = border_radius)),
+        ), style = list("border" = paste(border_width, "solid", color2), "width" = "100%", "border-radius" = border_radius)),
         htmlBr(),
         dbcRow(list(
           dbcCol(list(
             htmlH3("Top 10 directors",
-                   style=chart_style),
+              style = chart_style
+            ),
             dccGraph(id = "directors")
-          ), style = list("border" = paste(border_width,"solid", color2), "width" = "50%", "border-radius" = border_radius)),
+          ), style = list("border" = paste(border_width, "solid", color2), "width" = "50%", "border-radius" = border_radius)),
           dbcCol(list(
             htmlH3("Durations",
-                   style=chart_style),
+              style = chart_style
+            ),
             htmlDiv(
               list(
                 dbcTabs(
@@ -100,12 +110,12 @@ app$layout(
                   list(
                     dbcTab(
                       dccGraph(id = "movies"),
-                      style = list("width"= "520px", "height"= "520px"),
+                      style = list("width" = "520px", "height" = "520px"),
                       label = "Movies", tab_id = "Movies"
                     ),
                     dbcTab(
                       dccGraph(id = "tv"),
-                      style = list("width"= "520px", "height"= "520px"),
+                      style = list("width" = "520px", "height" = "520px"),
                       label = "TV shows", tab_id = "TV Shows"
                     )
                   )
@@ -113,7 +123,7 @@ app$layout(
               ),
               style = list("color" = "#b20710")
             )
-          ), style = list("border" = paste(border_width,"solid", color2), "width" = "50%", "border-radius" = border_radius))
+          ), style = list("border" = paste(border_width, "solid", color2), "width" = "50%", "border-radius" = border_radius))
         ))
       ))
     ))
@@ -121,14 +131,16 @@ app$layout(
 )
 
 
-plot_world_map <- function(year) {
-  country_codes <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/2014_world_gdp_with_codes.csv")
-  world_map <- read.csv("data/processed/world_map_data.csv")
-
-  summation <- world_map %>%
+plot_world_map <- function(rate, cat, year) {
+  
+  summation <- df %>%
     filter(release_year <= {{ year }}) %>%
+    filter(genres %in% cat) %>%
+    filter(rating %in% rate) %>%
+    merge(world_map, by = "country") %>%
+    select(country, country_code, lat, lon) %>%
     group_by(country) %>%
-    summarize(total_count = sum(count))
+    summarize(total_count = n())
 
   merged <- merge(summation, country_codes, by.x = "country", by.y = "COUNTRY")
 
@@ -162,6 +174,7 @@ plot_world_map <- function(year) {
     colorbar(title = "Count") %>%
     layout(
       clickmode = "event+select",
+      paper_bgcolor='rgba(0,0,0,0)',
       geo = g
     )
   p
@@ -169,28 +182,45 @@ plot_world_map <- function(year) {
 
 app$callback(
   output("world_map", "figure"),
-  list(input("year_slider", "value")),
-  function(year) {
-    plot_world_map(year)
+  list(input("rating_list", "value"),
+       input("genre_list", "value"),
+       input("year_slider", "value")),
+  function(rate, cat, year) {
+    plot_world_map(rate, cat, year)
   }
 )
 
-plot_hist_duration <- function(type_name, rate, cat, year) {
-  plot_df <- genres_df %>%
+plot_hist_duration <- function(rate, cat, year, type_name) {
+  plot_df <- df %>%
     filter(type == {{ type_name }}) %>%
+    filter(release_year <= {{ year }}) %>%
     filter(genres %in% cat) %>%
     filter(rating %in% rate) %>%
-    filter(release_year <= {{ year }}) %>%
     select(duration, genres, show_id) %>%
     distinct()
-
+  
+  y_title <- "Duration of movies (minutes)"
+  if(type_name == "TV Show"){
+    y_title <- "Number of seasons"
+  }
+  
   chart <- plot_df %>%
     ggplot() +
-    geom_boxplot(aes(y = duration, x = genres)) +
+    geom_boxplot(aes(y = duration, x = genres),
+      fill = color1,
+      color = title_color
+    ) +
     xlab("") +
-    ylab("Number of Movies") +
+    ylab(y_title) +
     labs(col = "Genres") +
     theme_bw() +
+    theme(
+      axis.text = element_text(colour = title_color),
+      axis.title.x = element_text(colour = title_color),
+      axis.title.y = element_text(colour = title_color),
+      panel.background = element_rect(fill = "transparent"),
+      plot.background = element_rect(fill = "transparent")
+    ) +
     coord_flip()
 
   ggplotly(chart)
@@ -204,7 +234,7 @@ app$callback(
     input("year_slider", "value")
   ),
   function(rate, cat, year) {
-    plot_hist_duration("Movie", rate, cat, year)
+    plot_hist_duration(rate, cat, year, "Movie")
   }
 )
 
@@ -216,7 +246,7 @@ app$callback(
     input("year_slider", "value")
   ),
   function(rate, cat, year) {
-    plot_hist_duration("TV Show", rate, cat, year)
+    plot_hist_duration(rate, cat, year, "TV Show")
   }
 )
 
@@ -234,10 +264,17 @@ plot_directors <- function(rate, cat, year) {
     arrange(desc(Count)) %>%
     slice(1:10) %>%
     ggplot() +
-    geom_bar(aes(x = Count, y = reorder(director, Count)), stat = "identity", fill = "#b20710") +
+    geom_bar(aes(x = Count, y = reorder(director, Count)), stat = "identity", fill = color1) +
     ylab("") +
     xlab("Number of Movies + TV shows") +
-    theme_bw()
+    theme_bw() +
+    theme(
+      axis.text = element_text(colour = title_color),
+      axis.title.x = element_text(colour = title_color),
+      axis.title.y = element_text(colour = title_color),
+      panel.background = element_rect(fill = "transparent"),
+      plot.background = element_rect(fill = "transparent")
+    )
 
   ggplotly(chart, tooltip = "Count")
 }
