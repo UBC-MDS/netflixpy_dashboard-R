@@ -3,7 +3,7 @@ Milestone 4 Reflection
 
 We extended the dashboard that visualizes some trends of movies and TV
 shows in Netflix to contain the rating widget:
-1. Rating Widget: A drop dwon to filter selected movie anf TV shows. It is interactive
+1. Rating Widget: A drop down to filter selected movie anf TV shows. It is interactive
 across all plots.
 
 We modified the duration plot by making it a boxplot. This represents the information better
@@ -42,6 +42,8 @@ Although the current implemented dashboard performs well in terms of the
 plot interactivity and widgets described above, there are some
 limitations that we would like to address by future additions as
 described below:
+
+-   Adding a word cloud for the titles of the movies.
 
 -   Adding the selection between movie and TV shows for the world map
     and director plots.
