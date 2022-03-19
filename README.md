@@ -26,13 +26,13 @@ This app contains a landing page that shows the distribution (bar, line or densi
 4. Taiwo Owoseni
 
 Feedback and suggestions are always welcome! Please read [the contributing
-guidelines](https://github.com/UBC-MDS/netflixpy_dashboard-R/blob/main/CONTRIBUTING.md)
+guidelines](https://github.com/UBC-MDS/netflixpy_dashboard_R/blob/main/CONTRIBUTING.md)
 to get started.
 
 ## Installation
 If you would like to help contribute to the app, you can set up the system as follows:
 1. Download the necessary packages listed in `init.R`
-2. Clone this repo using `https://github.com/UBC-MDS/netflixpy_dashboard.git`
+2. Clone this repo using `https://github.com/UBC-MDS/netflix_dashboard_R.git`
 
 ### To run the app locally:
 1. Navigate to the root of this repo
@@ -46,13 +46,13 @@ R src/app.R
 ## Support
 
 If you run into troubles, please [check the issue
-list](https://github.com/UBC-MDS/netflixpy_dashboard-R/issues) to see
+list](https://github.com/UBC-MDS/netflixpy_dashboard_R/issues) to see
 if your problem has already been reported or to open new issues.
 
 ## Code of conduct
 
 In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. Detailed descriptions
-of these points can be found in [`CONDUCT.md`](https://github.com/UBC-MDS/netflixpy_dashboard-R/blob/main/CONDUCT.md).
+of these points can be found in [`CONDUCT.md`](https://github.com/UBC-MDS/netflixpy_dashboard_R/blob/main/CONDUCT.md).
 
 ## License
 The Netflix Dashboard was created by Anahita Einolghozati, Joyce Wang, Rohit Rawat, and Taiwo Owoseni. It is licensed under the terms of the MIT license.
