@@ -39,15 +39,15 @@ to get started.
 ## Installation
 If you would like to help contribute to the app, you can set up the system as follows:
 1. Download the necessary packages listed in `init.R`
-2. Clone this repo using `https://github.com/UBC-MDS/netflix_dashboard_R.git`
+2. Clone this repo using `https://github.com/UBC-MDS/netflix_dashboard-R.git`
 
 ### To run the app locally:
 1. Navigate to the root of this repo
 2. In the command line, enter
 ```
-R src/app.R
+R app.R
 ```
-3. Copy the address printed out after "Dash is running on" to a browser to view the Dash app.
+3. Open your browser at http://0.0.0.0:8050 to access the app.
 
 
 ## Support
