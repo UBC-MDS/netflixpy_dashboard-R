@@ -20,6 +20,11 @@ This app contains a landing page that shows the distribution (bar, box and map p
 
 Users can filter the plots by selecting a genre categories and/or rating categories. Additionally, by dragging a range of years in the year slidebar, users can further filter the country, director, and duration, word cloud plots to a smaller subset of data reflecting the selected range of years. 
 
+## Dashboard Sketch
+
+
+![dashboard gif](docs/R_netflix_gif.gif)
+
 ## Contributions
 
 1. Anahita Einolghozati
